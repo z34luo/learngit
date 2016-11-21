@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../static/js/jquery.min.js"></script>
+<script>
+var thisId = window.location.hash.substring(1).split('&')[0];
+
+function jump1()
+{
+    alert(thisId);
+    $.ajax({type:"POST",
+                        url:"/api/access_token",
+                        data:{
+                                'access_token':thisId
+                             },
+                        success:function(data)
+                        { 
+                            alert("Hello");
+                            window.location.assign('/main_page');
+                        },
+                        error:function()
+                        {
+                            alert("Your password is not right.");
+                        }
+                        });
+}
+
+</script>
+
+</head>
+<body>
+<p>Welcome to data page</p>
+
+<input type="button" name="ok" value="OK" onclick="jump1()"/>
+</body>
+
+
+</html>

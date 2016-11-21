@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="/static/css/css.css">
+    <script>
+        function jump1(){
+            open(
+                    "sidebar.html",
+                    "Side bar",
+                    "width=2000,height=2000"
+            )
+        }
+        function add(){
+            var t =document.createElement("tr");
+            var tdnu=document.createElement("td");
+            tdnu.innerHTML=document.getElementById("username").value;
+            var tdna =document.createElement("td");
+            tdna.innerHTML=document.getElementById("password").value;
+            var tdn1=document.createElement("td");
+            tdn1.innerHTML=document.getElementById("email").value;
+            var tdn2 =document.createElement("td");
+            tdn2.innerHTML=document.getElementById("firstname").value;
+            var tdn3 =document.createElement("td");
+            tdn3.innerHTML=document.getElementById("lastname").value;
+            var tdd = document.createElement("td");
+            tdd.innerHTML="<td><a href=\"javascript:;\" onclick=\"dele(this)\">Delete</a></td>";
+            t.appendChild(tdnu);
+            t.appendChild(tdna);
+            t.appendChild(tdn1);
+            t.appendChild(tdn2);
+            t.appendChild(tdn3);
+            t.appendChild(tdd);
+            var ta = document.getElementById("table");
+            ta.appendChild(t);
+        }
+        function dele(pram){
+            pram.parentNode.parentNode.parentNode.removeChild(pram.parentNode.parentNode);
+        }
+    </script>
+</head>
+<body>
+<h1>Register</h1>
+Create a Username: <input type="text" name="username" id="username"><br/>
+Create a Password: <input type="password" name="password" id="password"><br/>
+Your E-mail address: <input type="text" name="email" id="email"><br/>
+First Name: <input type="text" id="firstname">
+Last Name: <input type="text" id="lastname"><br/>
+<input type="button" value="Complete Sign-up" onclick="add()">
+<input type="button" value="Go" onclick="jump1()">
+<table border="1" width="50%" id="table">
+    <tr>
+        <th><font color="black">Username</font></th>
+        <th><font color="black">Password</font></th>
+        <th><font color="black">E-mail</font></th>
+        <th><font color="black">First Name</font></th>
+        <th><font color="black">Last Name</font></th>
+        <th><font color="black"> Delete</font></th>
+    </tr>
+</table>
+</body>
+</html>

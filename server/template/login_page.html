@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>login page</title>
+    <link rel="stylesheet" href="../static/css/css.css">
+    <script src="../static/js/jquery.min.js"></script>
+    <script>
+
+        function jump1(){
+            location.assign('/sidebar');
+        }
+        function jump(){
+            location.assign('/register');
+        }
+        function add(){
+            var t =document.createElement("tr");
+            var tdnu=document.createElement("td");
+            tdnu.innerHTML=document.getElementById("username").value;
+            var tdna =document.createElement("td");
+            tdna.innerHTML=document.getElementById("password").value;
+            var tdd = document.createElement("td");
+            tdd.innerHTML="<td><a href=\"javascript:;\" onclick=\"dele(this)\">Delete</a></td>";
+            t.appendChild(tdnu);
+            t.appendChild(tdna);
+            t.appendChild(tdd);
+            var ta = document.getElementById("table");
+            ta.appendChild(t);
+           // document.write(tdnu.innerHTML);
+            $.ajax({type:"POST",
+                    url:"/api/authenticate",
+                    data:{'username':$("#username").val(),
+                          'password':$("#password").val()
+                         },
+                    success:function(data)
+                    { 
+                        alert("Hello");
+                        window.location.assign('/main_page');
+                    },
+                    error:function()
+                    {
+                        alert("Your password is not right.");
+                    }
+                    });
+        }
+        function dele(pram){
+            pram.parentNode.parentNode.parentNode.removeChild(pram.parentNode.parentNode);
+        }
+    </script>
+</head>
+<body>
+<h1>Login page</h1>
+<form>
+Username: <input type="text" name="username" id="username"><br/><br/>
+Password: <input type="password" name="password" id="password"><br/><br/>
+</form>
+<input type="button" name="submit" value="Login" onclick="add()"/>
+<input type="button" name="register" value="Register" onclick="jump()"/>
+<input type="button" name="ok" value="OK" onclick="jump1()"/>
+<br/>
+<br/>
+<br/>
+<br/>
+<table border="1" width="50%" id="table">
+    <tr>
+        <th><font color="black">User Name</font></th>
+        <th><font color="black">Password</font></th>
+        <th><font color="black"> Delete</font></th>
+    </tr>
+    </table>
+
+
+
+
+</body>
+</html>

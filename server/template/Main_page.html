@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <link rel="stylesheet" href="/static/css/css.css">
+    <style type="text/css">
+        /* CSS样式制作 */
+        ul{
+            height:60px;
+            padding:0px;
+            margin:0px;
+        }
+        ul li{
+            text-align:center;
+            width:100px;
+            height:26px;
+            float:left;
+            list-style:none;
+            border:1px solid gray;
+            margin:0px 3px;
+            padding:4px 0px 0px;
+            cursor:pointer;
+        }
+        .class{
+            background-color:#fff;
+        }
+        .disp{
+            border:2px solid black;
+            display:block;
+        }
+        .hid{
+            border:2px solid black;
+            display:none;
+        }
+        #fct{
+            width:200px;
+            position:absolute;
+            top:150px;
+            left:00px;
+        }
+        #fc{
+            width:200px;
+            position:absolute;
+            top:150px;
+            left:100px;
+        }
+        #jj{
+            width:200px;
+            position:absolute;
+            top:150px;
+            left:400px;
+        }
+        #es{
+            width:200px;
+            position:absolute;
+            top:150px;
+            left:700px;
+        }
+    </style>
+    <script type="text/javascript">
+        // JS实现选项卡切换
+
+        function cha(pram){
+            var con = document.getElementsByName("con");
+            for(var i=0;i<con.length;i++){
+                var cla = con[i].getAttribute("class");
+                if(cla=="disp"){
+                    con[i].setAttribute("class","hid");
+                }
+            }
+            document.getElementById(pram.getAttribute("id")+"t").setAttribute("class","disp");
+        }
+    </script>
+</head>
+<body>
+<div>
+    <ul>
+        <li name="title" id="fc" onclick="cha(this)">
+            Main Light
+        </li>
+        <li name="title" id="jj" onclick="cha(this)">
+            Weather
+        </li>
+        <li name="title" id="es" onclick="cha(this)">
+            Door
+        </li>
+    </ul>
+</div>
+<div class="hid" name="con"id="fct" >
+    <p>
+        <img src="/static/photo/789.gif" width="165" height="60" />
+    </p>
+</div>
+<div class="hid" name="con" id="jjt" >
+    <p>
+        <img src="/static/photo/456.gif" width="165" height="60" />
+    </p>
+</div>
+<div class="hid" name="con" id="est" >
+    <p>
+        <img src="/static/photo/111.gif" width="165" height="60" />
+    </p>
+</div>
+
+</body>
+</html>

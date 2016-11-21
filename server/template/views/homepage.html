@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Main</title>
+
+    <!-- Bootstrap -->
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="stylesheets/default.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!--pie chart-->
+    <div>
+          <script type="text/javascript">
+
+          // Load the Visualization API and the corechart package.
+          google.charts.load('current', {'packages':['corechart']});
+
+          // Set a callback to run when the Google Visualization API is loaded.
+          google.charts.setOnLoadCallback(drawChart);
+
+          // Callback that creates and populates a data table,
+          // instantiates the pie chart, passes in the data and
+          // draws it.
+          function drawChart() {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+              ['A/C', 3],
+              ['Devices', 1],
+              ['Light', 1],
+              ['Freezer', 1],
+              ['Others', 2]
+            ]);
+
+            // Set chart options
+            var options = {'title':'Electricity consumption',
+                           'width':510,
+                           'height':400};
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+          }
+        </script>
+      </div>
+    <!--combo chart-->
+    <div>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawVisualization);
+
+
+          function drawVisualization() {
+            // Some raw data (not necessarily accurate)
+            var data = google.visualization.arrayToDataTable([
+             ['Month', 'Light', 'A/C', 'Devices', 'Others', 'Freezer', 'Average'],
+             ['2016/02',  165,      938,         522,             998,           450,      614.6],
+             ['2016/04',  135,      1120,        599,             1268,          288,      682],
+             ['2016/06',  157,      1167,        587,             807,           397,      623],
+             ['2016/08',  139,      1110,        615,             968,           215,      609.4],
+             ['2016/10',  136,      691,         629,             1026,          366,      569.6]
+          ]);
+
+        var options = {
+          title : 'Monthly Coffee Production by Country',
+          vAxis: {title: 'KWh'},
+          hAxis: {title: 'Month'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div1'));
+        chart.draw(data, options);
+      }
+    </script>  
+    </div>
+  </head>
+  <body>
+
+    <div class="container-fluid display-table">
+      <div class="row display-table-row">
+        <!-- side menu -->
+        <div class="col-md-2 col-sm-1 hidden-xs display-table-cell valign-top" id="side-menu">
+          <h1 class="hidden-xs hidden-sm">UZI</h1>
+          <ul>
+                <li class="link active">
+                    <a href="homepage.ejs">
+                        <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                        <span class="hidden-sm hidden-xs">Dashboard</span>
+                    </a>
+                </li>
+                <li class="link">
+                    <a href="#collapse-post" data-toggle="collapse" aria-control="collapse-post">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <span class="hidden-sm hidden-xs">Social</span>
+                    </a>
+                    <ul class="collapse collapseable" id="collapse-post">
+                        <li><a href="http://www.youtube.com" target="_blank">Youtube</a></li>
+                        <li><a href="http://www.facebook.com" target="_blank">Facebook</a></li>
+                        <li><a href="http://www.instagram.com" target="_blank">Instagram</a></li>
+                    </ul>
+                </li>
+                
+                <li class="link">
+                    <a href="#collapse-comment1" data-toggle="collapse" aria-control="collapse-comment1">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        <span class="hidden-sm hidden-xs">Tools</span>
+                    </a>
+                    <ul class="collapse collapseable" id="collapse-comment1">
+                        <li>
+                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#cal">Calculator</button>
+                                <div class="modal fade" id="cal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document" style="width:220px;">
+                                        <div class="modal-content">
+                                            <iframe width="219" height="302" src="http://www.calculator-1.com/outdoor/?f=ffa500&r=666666" scrolling="no" frameborder="0"></iframe><br /><a href="http://www.calculator-1.com/"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#weather">Weather</button>
+                                <div class="modal fade" id="weather" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document" >
+                                        <div class="modal-content">
+                                            <a href="http://www.accuweather.com/en/ca/waterloo/n2l/current-weather/55073" class="aw-widget-legal"></a>
+                                            <div id="awtd1479186683402" class="aw-widget-36hour"  data-locationkey="" data-unit="c" data-language="en-us" data-useip="true" data-uid="awtd1479186683402" data-editlocation="true"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
+                                        </div>
+                                    </div>
+                                </div>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="link setting-btn">
+                    <a href="#collapse-comment" data-toggle="collapse" aria-control="collapse-comment">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        <span class="hidden-sm hidden-xs">Setting</span>
+                    </a>
+                    <ul class="collapse collapseable" id="collapse-comment">
+                        <li><a href="#">Notification</a></li>
+                        <li><a href="#">Pravicy</a></li>
+                        <li><a href="#">Update</a></li>
+                    </ul>
+                </li>
+                <li class="link">
+                    <a href="#">
+                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                        <span class="hidden-sm hidden-xs">Logout</span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+
+        <!-- main content area -->
+        <div class="col-md-10 col-sm-11 display-table-cell valign-top backgroundimage">
+            
+          <div class="row">
+            <header id="nav-header" class="clearfix">
+              <div class="col-md-5">
+                <!--navbar button-->
+                <nav class="navbar-default pull-left square">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </nav>
+                <!--google search-->
+                <form method="get" action="http://www.google.com/search" target="google_window" class="navbar-form navbar-left hidden-xs">
+                            <table bgcolor="#ffffff">
+                                <tr><td nowrap="nowrap" valign="top" align="left" height="32">
+
+                                    <label for="sbi" style="display: none">Google</label>
+                                    <input type="text" name="q" size="31" maxlength="255" value="" id="sbi" placeholder="Google" class="pull-left" style="width: 1000px;"></input>
+                                    <label for="sbb" style="display: none">submit form</label>
+                                    <input type="submit" name="sa" value="Google" id="sbb"></input>
+                                    <input type="hidden" name="client" value="pub-1312502470952504"></input>
+                                    <input type="hidden" name="forid" value="1"></input>
+                                    <input type="hidden" name="ie" value="GB2312"></input>
+                                    <input type="hidden" name="oe" value="GB2312"></input>
+                                    <input type="hidden" name="safe" value="active"></input>
+                                    <input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1"></input>
+                                    <input type="hidden" name="hl" value="en"></input>
+                                </td></tr></table>
+                        </form>
+              </div>
+            </header>
+          </div>
+
+          <div>
+              <!--six button-->
+              <div class="row">
+                
+                  <button type="button" class="btn btn-primary btn-lg four col-md-2" data-toggle="modal" data-target="#lightset">Light</button>
+                    <div class="modal fade modaltv" id="lightset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" style="width:250px;" role="document">
+                            <div class="modal-content">
+                                <ul>
+                                    <li>
+                                        <p>Bedroom</p>
+                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></button>
+                                    </li>
+                                    <li>
+                                        <p>Living-room</p>
+                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></button>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                  
+
+                    <button type="button" class="btn btn-success btn-lg four col-md-2" data-toggle="modal" data-target="#acset">A&#47;C</button>
+                    <div class="modal fade modaltv" id="acset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" style="width:240px;" role="document">
+                            <div class="modal-content">
+                                <button type="button" class="btn btn-success btn-lg five pull-right" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></button>
+                                <input type="number" placeholder="&#x2103;" class="acset">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <button type="button" class="btn btn-warning btn-lg four col-md-2" data-toggle="modal" data-target="#doorset">Door</button>
+                    <div class="modal fade modaltv" id="doorset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" style="width:250px;" role="document">
+                            <div class="modal-content">
+                                <ul>
+                                    <li><a href="#">Main door</a></li>
+                                    <li><a href="#">Bedroom 1</a></li>
+                                    <li><a href="#">Bedroom 2</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-danger btn-lg four col-md-2" data-toggle="modal" data-target="#tvset">TV</button>
+                    <div class="modal fade modaltv" id="tvset" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" style="width:200px;"  role="document">
+                            <div class="modal-content">
+                            <ul>
+                                <li>
+                                    <button type="button" class="btn btn-danger btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                    <button type="button" class="btn btn-danger btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                                </li>
+                                <li>
+                                    <button type="button" class="btn btn-danger btn-lg six" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span></button>
+                                    <button type="button" class="btn btn-danger btn-lg six" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-volume-down" aria-hidden="true"></span></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                    <button type="button" class="btn btn-info btn-lg four col-md-2" data-toggle="modal" data-target="#myModal">Router</button>
+                    <button type="button" class="btn btn-default btn-lg four col-md-2" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+              </div>
+            <!--pie and combo-->
+            <div class="row nice">
+              <!--pie chart-->
+              <div class="col-md-4 nice">
+                <div>
+                   <div id="chart_div" class="hidden-xs hidden-sm hidden-md peichart"></div>
+                </div>
+              </div>
+              <!--combo chart-->
+              <div class="col-md-6 nice">
+                <div id="chart_div1" class="hidden-xs hidden-md hidden-sm combochart" style="width: 800px; height: 400px;"></div>
+              </div>
+            </div>
+            <!--news-->
+            <div class="row news nice">
+              <div class="col-md-5">
+                <div class="hidden-md hidden-xs hidden-sm news">
+                     <ul id="myTabs" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">New York Times</a></li>
+                    <li role="presentation"><a href="#news" aria-controls="news" role="tab" data-toggle="tab">CBC News</a></li>
+                    <li role="presentation"><a href="#money" aria-controls="money" role="tab" data-toggle="tab">ABC News</a></li>
+                    
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home">
+                        <script type="text/javascript" src="http://output94.rssinclude.com/output?type=js&amp;id=1107400&amp;hash=4281b738bd0ea6e57d97dedb6a5a8ecf"></script>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="news">
+                        <script type="text/javascript" src="http://output94.rssinclude.com/output?type=js&amp;id=1107402&amp;hash=b13896e7feafc1b74293bf4785a81ed0"></script>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="money">
+                        <script type="text/javascript" src="http://output95.rssinclude.com/output?type=js&amp;id=1107403&amp;hash=1b2fbaa2535ce5fb33ed8cf35fa31c18"></script>
+                    </div>
+                    
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row footer">
+            <footer id="admin-footer" class="clearfix">
+              <div class="pull-left"><b>Copyright </b>&copy; 2016</div>
+              <div class="pull-right">ECE651 Project</div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="javascripts/jquery-3.1.1.min.js"></script>
+    <script src="javascripts/bootstrap.min.js"></script>
+    <script src="javascripts/default.js"></script>
+  </body>
+</html>

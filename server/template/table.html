@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/css/LS_css.css">
+        <link rel="stylesheet" href="../static/css/site_min.css">
+        <script src="../static/js/jquery.min.js"></script>
+        <script src="../static/js/LS_js.js"></script>
+        <script type="text/javascript">
+        function abc(){
+         window.location.href="http://localhost:9000/static/xlsx/sample.xlsx";
+        }
+        </script>
+
+                
+    </head>
+ 
+    <body>
+    
+    <nav class="navbar navbar-inverse navbar-default" role="navigation">
+        <div class="container-fiuld">
+            <div class="container">
+                    <div class="nav-header">
+                        <a class="navbar-brand" href="#">Company name</a>
+                    </div>
+                    
+                    <form class="navbar-form navbar-right" role="signin">
+                        <button class="btn btn-default cd-signin">Signin</button>
+                        <button class="btn btn-default cd-signup">Register</button>
+                    </form>
+            </div>   
+        </div>
+    </nav>
+    <div class="jumbotron masthead">
+        <div class="container">
+              <h1>ForeSight</h1>
+              <p>...</p>
+              <p><a class="btn btn-primary btn-lg" href="#" role="button">Let's begin!</a></p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="projects-header page-header">
+           
+                    <div class="col-md-6">
+                        <p><a class="btn btn-primary btn-lg" href="#" role="button">Display data</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-primary btn-lg" href="#" role="button" onclick="abc();">Create Excel</a></p>
+                    </div>
+
+        </div>
+    <div class="row"> 
+        <div class="col-md-12">
+            <table class="table table-striped " id="table">
+                <thead>
+                <tr>
+                    <th><font color="black">impressions</font></th>
+                    <th><font color="black">likes</font></th>
+                    <th><font color="black">replies</font></th>
+                </tr>
+                </thead>
+            </table>
+          
+        </div>
+    </div>  
+</div>  
+    <script src="../static/js/table.js"></script>  
+    </body>
+  
+</html>

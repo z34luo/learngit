@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+<link rel="stylesheet" href="../static/css/LS_css.css">
+<link rel="stylesheet" href="../static/css/site_min.css">
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/LS_js.js"></script>
+<script>
+function add()
+{
+     $.ajax({type:"GET",
+                    url:"/platformselection",
+                    success:function(data)
+                    { 
+                       // alert("Hello");
+                        window.location.assign('/platformselection');
+                    },
+                    error:function()
+                    {
+                       // alert("Your password is not right.");
+                    }
+                    });
+        }
+
+
+</script>
+<style>
+.navbar
+{
+
+}
+.thumbnail
+{
+    border-width:0px;
+    text-align:center;
+}
+img
+{
+    width:250px;
+    height:250px;
+
+}
+
+.cd-switcher
+{
+    list-style:none;
+}
+
+
+.caption h3
+{
+
+
+}
+</style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse navbar-default" role="navigation">
+    <div class="container-fiuld">
+        <div class="container">
+                <div class="nav-header">
+                    <a class="navbar-brand" href="#">Company name</a>
+                </div>
+                
+                <form class="navbar-form navbar-right" role="signin">
+                    <button class="btn btn-default cd-signin">Signin</button>
+                    <button class="btn btn-default cd-signup">Register</button>
+                </form>
+        </div>   
+    </div>
+</nav>
+<div class="jumbotron masthead">
+    <div class="container">
+          <h1>ForeSight</h1>
+          <p>...</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Let's begin!</a></p>
+    </div>
+</div>
+<div class="container">
+        <div class="projects-header page-header">
+            <h2>Provided Function</h2>
+            <p>...</p>
+        </div>
+        <div class="row">       
+            <div class="col-xs-6 col-md-4">
+                <div class="thumbnail">
+                    <a href="#" >
+                        <img src="../static/photo/data_gathering.png"  onclick="add()" alt="..." >
+                    </a>
+                    <div class="caption">
+                        <h3>Data Gathering</h3>
+                    </div> 
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <div class="thumbnail">
+                    <a href="#" >
+                        <img src="../static/photo/data_analyzing.png"  alt="..." >
+                    </a>
+                    <div class="caption">
+                        <h3>Data Analyzing</h3>
+                    </div> 
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <div class="thumbnail">
+                    <a href="#" >
+                        <img src="../static/photo/report_building.png" alt="..." >
+                    </a>
+                    <div class="caption">
+                        <h3>Report Building</h3>
+                    </div> 
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="cd-user-modal">  
+<div class="cd-user-modal-container"> 
+    <ul class="cd-switcher"> 
+        <li><a href="#0">Log In</a></li> 
+        <li><a href="#0">Sign Up</a></li> 
+    </ul> 
+
+    <div id="cd-login">  
+        <form class="cd-form">
+                <p class="fieldset">
+                    <label class="image-replace cd-username" for="signin-username">Username</label>
+                    <input class="full-width has-padding has-border" id="signin-username" type="text" placeholder="Enter Username">
+                </p>
+
+                <p class="fieldset">
+                    <label class="image-replace cd-password" for="signin-password">Password</label>
+                    <input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Enter Password">
+                </p>
+
+                <p class="fieldset">
+                    <input type="checkbox" id="remember-me" checked>
+                    <label for="remember-me">Remember Me</label>
+                </p>
+
+                <p class="fieldset">
+                    <input class="full-width2" type="submit" value="Log In">
+                </p>
+            </form>
+    </div> 
+
+    <div id="cd-signup">
+            <form class="cd-form">
+                <p class="fieldset">
+                    <label class="image-replace cd-username" for="signup-username">Username</label>
+                    <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Enter Username">
+                </p>
+
+                <p class="fieldset">
+                    <label class="image-replace cd-email" for="signup-email">Email</label>
+                    <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="Enter Email Address">
+                </p>
+
+                <p class="fieldset">
+                    <label class="image-replace cd-password" for="signup-password">Password</label>
+                    <input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Enter Password">
+                </p>
+
+                <p class="fieldset">
+                    <input type="checkbox" id="accept-terms">
+                    <label for="accept-terms">I have read and accept <a href="#0">Terms of Service</a></label>
+                </p>
+
+                <p class="fieldset">
+                    <input class="full-width2" type="submit" value="Sign Up">
+                </p>
+            </form>
+        </div>
+
+        <a href="#0" class="cd-close-form">Close</a>
+    </div>
+</div> 
+</div> 
+</body>    
+</html>

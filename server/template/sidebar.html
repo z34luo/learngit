@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Side bar</title>
+    <style>
+        body{
+            padding:0px;
+            margin:0px;
+            font-family:helvetica;
+        }
+        #sidebar{
+            width:200px;
+            height:100%;
+            position:absolute;
+            background:#151719;
+            top:0px;
+            left:0px;
+        }
+        #sidebar ul{
+            margin:0px;
+            padding:0px;
+        }
+        #sidebar ul li{
+            color:white;
+            padding:10px;
+            width:180px;
+            border-bottom:2px solid black;
+            display:block;
+        }
+        #btn{
+            padding:20px;
+            margin:20px;
+            position:absolute;
+            right:-75px;
+        }
+        #btn span{
+            width:25px;
+            height:5px;
+            background:black;
+            display:block;
+            margin-bottom:4px;
+        }
+        #Wicon{
+            width:150px;
+            height:10%;
+            position:absolute;
+            background:gray;
+            top:150px;
+            left:300px;
+        }
+        #Dicon{
+            width:150px;
+            height:10%;
+            position:absolute;
+            background:gray;
+            top:150px;
+            left:500px;
+        }
+        #Licon{
+            width:150px;
+            height:10%;
+            position:absolute;
+            background:gray;
+            top:150px;
+            left:700px;
+        }
+        #Licont{
+            width:150px;
+            position:absolute;
+            top:201px;
+            left:700px;
+        }
+        #Dicont{
+            width:150px;
+            position:absolute;
+            top:201px;
+            left:500px;
+        }
+        #Wicont{
+            width:150px;
+            position:absolute;
+            top:201px;
+            left:300px;
+        }
+        .disp{
+
+            display:block;
+        }
+        .hid{
+            border:2px solid black;
+            display:none;
+        }
+    </style>
+    <script>
+        var status = 0;
+        function show(sidebar){
+            if(status==0) {
+                sidebar.style.left = "0px";
+                sidebar.style.transition = "left 0.6s liner";
+                status=1;
+            }
+            else {
+                sidebar.style.left = "-200px";
+                sidebar.style.transition = "left 0.6s linear";
+                status=0;
+            }
+        }
+        function google() {
+            window.open("http://www.google.com");
+        }
+        function facebook() {
+            window.open("http://www.facebook.com");
+        }
+        function ins() {
+            window.open("http://www.instagram.com");
+        }
+        function youtube() {
+            window.open("http://www.youtube.com");
+        }
+        function cha(pram){
+            var con = document.getElementsByName("con");
+            for(var i=0;i<con.length;i++){
+                var cla = con[i].getAttribute("class");
+                if(cla=="disp"){
+                    con[i].setAttribute("class","hid");
+                }
+            }
+            document.getElementById(pram.getAttribute("id")+"t").setAttribute("class","disp");
+        }
+        </script>
+</head>
+<body>
+<div id="sidebar">
+    <div id="btn" onclick="show(sidebar)">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <ul>
+        <li id="google" onclick="google()">Google</li>
+        <li onclick="facebook()">Facebook</li>
+        <li onclick="ins()">Instagram</li>
+        <li onclick="youtube()">Youtube</li>
+    </ul>
+</div>
+<div>
+    <ul>
+        <li id="Wicon" onclick="cha(this)">Weather</li>
+        <li id="Dicon" onclick="cha(this)">Door</li>
+        <li id="Licon" onclick="cha(this)">Main light</li>
+    </ul>
+</div>
+<div class="hid" name="con" id="Licont">
+    <p>
+        <img src="/static/photo/789.gif" width="150" height="60" />
+    </p>
+</div>
+<div class="hid" name="con"id="Wicont">
+    <p>
+        <img src="/static/photo/456.gif" width="150" height="60" />
+    </p>
+</div>
+<div class="hid" name="con" id="Dicont">
+    <p>
+        <img src="/static/photo/111.gif" width="150" height="60" />
+    </p>
+</div>
+</body>
+</html>

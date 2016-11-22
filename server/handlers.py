@@ -151,7 +151,7 @@ def api_light_control(*,status):
         raise APIValueError('status','Invalid status')
     r=web.Response()
     r.content_type='application/json'
-    r.body=dict()
+    #r.body=dict()
     return r
 
 

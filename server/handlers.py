@@ -173,10 +173,14 @@ def api_register_authenticate(*,username,password):
         raise APIValueError('username','Invalid username')
     if not password:
         raise APIValueError('password','Invalid password')
+#     users = yield from User.findAll('username=?', username)
+#     if len(users)> 0:
+#         raise APIError('register:failed', 'email', 'Email is already in use.')
+    print(username)
+    print(password)
     users = yield from User.findAll('username=?', username)
     if len(users)> 0:
-        raise APIError('register:failed', 'email', 'Email is already in use.')
-    
+        raise APIError('register:failed', 'username', 'Username is already in use.')
     user=User(username=username,password=password)
     yield from user.save()
     r=web.Response()

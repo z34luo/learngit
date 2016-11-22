@@ -31,7 +31,9 @@
                         Registration
                     </p>
                 </div>
+                <p  style="text-align:center;color:red;" id="inform"></p>
                 <div class="panel-body m15">
+               
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon">
@@ -87,12 +89,21 @@
                 type: 'post',
                 data: data,
                 success: function (data, status) {
-                    if (status === 'success') {
-                        location.href = 'login';
+           
+                    
+                    if (data['error'])
+                    {
+                        console.log(data);
+                        $('#inform').text(data['message']);
+                    }
+                    else  if (status === 'success') {
+                        location.href = '/login';
                     }
                 },
                 error: function (data, err) {
-                    location.href = 'register';
+                    
+                    $('#inform').text("Internal Error.");
+                    location.href = '/register';
                 }
             })
         }

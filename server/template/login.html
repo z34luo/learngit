@@ -29,6 +29,7 @@
                 <div class="panel-heading">
                     <p class="tc">Login first, please!</p>
                 </div>
+                <p  style="text-align:center;color:red;" id="inform"></p>
                 <div class="panel-body m15">
                     <div class="form-group">
                         <div class="input-group">
@@ -72,14 +73,18 @@
             type: 'post',
             data: data,
             success: function (data, status) {
-                if (status === 'success') {
+                if (data['error'])
+                    {
+                        console.log(data);
+                        $('#inform').text(data['message']);
+                    }
+                else if (status === 'success') {
                     location.href = '/homepage';
                 }
             },
             error: function (data, status) {
-                if (status === 'error') {
-                    location.href = '/login';
-                }
+                $('#inform').text("Internal Error.");
+                location.href = '/login';
             }
         });
     });

@@ -198,7 +198,7 @@ class RequestHandler(object):
                 ##  返回响应头
                 
         except APIError as e:
-            return dict(error=e.error,data=e.date,message=e.message)
+            return dict(error=e.error,data=e.data,message=e.message)
                                 
             
                 

@@ -145,7 +145,14 @@ def post_access_token(*,access_token):
     r.body=json.dumps(access_token,ensure_ascii=False).encode('utf-8')
     return r
 
-
+@post('/light_control')
+def api_light_control(*,status):
+    if not status:
+        raise APIValueError('status','Invalid status')
+    r=web.Response()
+    r.content_type='application/json'
+    r.body=dict()
+    return r
 
 
 @post('/login')

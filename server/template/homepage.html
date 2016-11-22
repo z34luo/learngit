@@ -207,7 +207,7 @@
                                         <p>Bedroom</p>
                                         <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                         <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></button>
+                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal" id="light_switch"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></button>
                                     </li>
                                     <li>
                                         <p>Living-room</p>
@@ -321,5 +321,28 @@
     <script src="../static/js/jquery-3.1.1.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
     <script src="../static/js/default.js"></script>
+    <script type="text/javascript"> 
+    $('#light_switch').click(function(){
+    var data ={"status":"true"};
+    $.ajax({
+            url:"/light_control",
+            type:'post',
+            data:data,
+            success:function(data, status) {
+                if (data['error'])
+                {
+                    console.log(data);
+                }
+                else if(status === 'success') {
+                    console.log("turn on the light.");
+                }
+            }
+            error: function (data, status) {
+                console.log("Internal Error.");
+            }
+    
+    });
+    }
+    </script>
   </body>
 </html>

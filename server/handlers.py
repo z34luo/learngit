@@ -159,6 +159,19 @@ def api_light_control(*,status):
     r.body=json.dumps(r_body,ensure_ascii=False).encode('utf-8')
     return r
 
+@post('/lightness_control')
+def api_lightness_control(*,status):
+    if not status:
+        raise APIValueError('status','Invalid status')
+    if(status=="up"):
+        print("turn on the light")
+    else:
+        print("turn off the light")
+    r=web.Response()
+    r.content_type='application/json'
+    r_body=dict()
+    r.body=json.dumps(r_body,ensure_ascii=False).encode('utf-8')
+    return r
 
 @post('/login')
 def api_authenticate(*,username,password):

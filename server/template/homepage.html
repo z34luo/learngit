@@ -205,8 +205,8 @@
                                 <ul>
                                     <li>
                                         <p>Bedroom</p>
-                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal" id="lightness_add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                        <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal" id="lightness_off"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                                         <button type="button" class="btn btn-primary btn-lg five" data-toggle="modal" data-target="#myModal" id="light_switch"><span class="glyphicon glyphicon-off" aria-hidden="true"></span></button>
                                     </li>
                                     <li>
@@ -374,6 +374,56 @@
     }
     
     });
+    
+    $("#lightness_add").click(function(){
+    var data ={"status":"up"};
+    $.ajax({
+                url:"/lightness_control",
+                type:'post',
+                data:data,
+                success:function(data, status) {
+                    if (data['error'])
+                    {
+                        console.log(data);
+                    }
+                    else if(status === 'success') {
+                        console.log("lightness increases.");
+                    }
+                },
+                error: function (data, status) {
+                    console.log("Internal Error.");
+                }
+        
+                });
+    
+    
+    });
+    
+    $("#lightness_off").click(function(){
+    var data ={"status":"off"};
+    $.ajax({
+                url:"/lightness_control",
+                type:'post',
+                data:data,
+                success:function(data, status) {
+                    if (data['error'])
+                    {
+                        console.log(data);
+                    }
+                    else if(status === 'success') {
+                        console.log("lightness decreases.");
+                    }
+                },
+                error: function (data, status) {
+                    console.log("Internal Error.");
+                }
+        
+                });
+    
+    
+    });
+    
+    
     </script>
   </body>
 </html>

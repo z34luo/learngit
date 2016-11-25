@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<script>
+ var a=true;
+function getValue(VAL){
+    console.log(window.a);
+    if (window.a)
+    {
+        alert(VAL);
+    }
+    a=!a;
+
+    console.log(window.a);
+}
+</script>
+
+</head>
+
+<body>
+
+<button type="button" value="abc" onclick="getValue(this.value)"> </button>
+</body>
+
+</html>

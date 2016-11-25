@@ -322,26 +322,57 @@
     <script src="../static/js/bootstrap.min.js"></script>
     <script src="../static/js/default.js"></script>
     <script type="text/javascript"> 
+    var a=true;
     $('#light_switch').click(function(){
-    var data ={"status":"true"};
-    $.ajax({
-            url:"/light_control",
-            type:'post',
-            data:data,
-            success:function(data, status) {
-                if (data['error'])
-                {
-                    console.log(data);
+    if(a)
+    {
+        var data ={"status":"open"};
+        $('#light_switch').addClass("active");
+        a=!a;
+        $.ajax({
+                url:"/light_control",
+                type:'post',
+                data:data,
+                success:function(data, status) {
+                    if (data['error'])
+                    {
+                        console.log(data);
+                    }
+                    else if(status === 'success') {
+                        console.log("turn on the light.");
+                    }
+                },
+                error: function (data, status) {
+                    console.log("Internal Error.");
                 }
-                else if(status === 'success') {
-                    console.log("turn on the light.");
+        
+                });
+    }
+    else{
+        var data ={"status":"close"};
+        a=!a;
+        $('#light_switch').removeClass("active");
+        $.ajax({
+                url:"/light_control",
+                type:'post',
+                data:data,
+                success:function(data, status) {
+                    if (data['error'])
+                    {
+                        console.log(data);
+                    }
+                    else if(status === 'success') {
+                        console.log("turn off the light.");
+                    }
+                },
+                error: function (data, status) {
+                    console.log("Internal Error.");
                 }
-            },
-            error: function (data, status) {
-                console.log("Internal Error.");
-            }
+        
+                });
     
-    });
+    }
+    
     });
     </script>
   </body>

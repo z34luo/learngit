@@ -149,9 +149,14 @@ def post_access_token(*,access_token):
 def api_light_control(*,status):
     if not status:
         raise APIValueError('status','Invalid status')
+    if(status=="open"):
+        print("turn on the light")
+    else:
+        print("turn off the light")
     r=web.Response()
     r.content_type='application/json'
-    #r.body=dict()
+    r_body=dict()
+    r.body=json.dumps(r_body,ensure_ascii=False).encode('utf-8')
     return r
 
 

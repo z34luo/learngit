@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register page</title>
     <link rel="stylesheet" href="../static/css/bootstrap.min.css" media="screen">
+    <script type="text/javascript" src="../static/js/sha1.min.js"></script>
     <style type="text/css">
         .m14{
             margin-top: 15%;
@@ -47,7 +48,7 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-lock"></span>
                             </span>
-                            <input type="text" class="form-control" id="password" name="password" placeholder="Password" required>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -83,7 +84,7 @@
             $('#password').css("border", "1px solid red");
             $('#password_again').css("border", "1px solid red");
         } else if (password === password_again) {
-            var data = {"username": username, "password": password};
+            var data = {"username": username, "password": CryptoJS.SHA1(password).toString()};
             $.ajax({
                 url: '/register',
                 type: 'post',

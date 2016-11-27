@@ -8,12 +8,62 @@ Created on 2016年10月17日
 import logging
 logging.basicConfig(level=logging.DEBUG)
 import json
-
+import re
+import time
+import hashlib
+import base64
+import asyncio
 from aiohttp import web
 from  web_frame  import get,post
 from apis import APIError,APIPermissionError,APIResourceNotFoundError,APIValueError
-from models import  User 
-import urllib
+from models import  User,next_id 
+from config import configs
+
+
+_RE_SHA1=re.compile(r'^[0-9a-f]{40}$')
+COOKIE_NAME='awesession'
+_COOKIE_KEY=configs.session.secret
+
+
+
+def user2cookie(user,max_age):
+    expires=str(int(time.time()+max_age))
+    
+    s='%s-%s-%s-%s' %(user.id,user.password,expires,_COOKIE_KEY)
+    L=[user.id,expires,hashlib.sha1(s.encode('utf-8')).hexdigest()]
+    return '-'.join(L)
+##根据用户信息拼接一个cookie字符串
+
+
+
+@asyncio.coroutine
+def cookie2user(cookie_str):
+    if not cookie_str:
+        return None
+    try:
+        L=cookie_str.split('-')
+
+        if len(L)!=3:
+            return None
+        uid,expires,sha1=L 
+        if int(expires)<time.time():
+            return None
+        
+        user=yield from User.find(uid)
+        if user is None:
+            return None
+        
+        s='%s-%s-%s-%s'%(uid,user.password,expires,_COOKIE_KEY)
+        if sha1!=hashlib.sha1(s.encode('utf-8')).hexdigest():
+            logging.info('invalid sha1')
+            return None
+        user.password='******'
+        return user
+    except Exception as e :
+        logging.exception(e)
+        return None
+        
+        
 
 @get('/')
 def index(request):
@@ -133,7 +183,14 @@ def get_excel(request):
     return{
         '__template__':'testexcel.html'
         }
-    
+
+@get('/logout')
+def api_logout(request):
+    referer=request.headers.get('Referer')
+    r=web.HTTPFound('/')
+    r.set_cookie(COOKIE_NAME,'-deleted-',max_age=0,httponly=True)
+    logging.info('user signed out')
+    return r
     
 @post('/api/access_token')
 def post_access_token(*,access_token):
@@ -177,17 +234,29 @@ def api_lightness_control(*,status):
 def api_authenticate(*,username,password):
     if not username:
         raise APIValueError('username','Invalid username')
-    if not password:
+    if not password :
         raise APIValueError('password','Invalid password')
     
     user=yield from User.findAll('username=?',username)
     if len(user)==0:
         raise APIValueError('username','Username not Found.')
+    
+    
     user=user[0]
-    if  user.password!=password:
+    sha1=hashlib.sha1()
+    sha1.update(user.id.encode('utf-8'))
+    sha1.update(b':')
+    sha1.update(password.encode('utf-8'))
+      
+    if  user.password!=sha1.hexdigest():
         raise APIValueError('password','Invalid password')
+    
     r=web.Response()
     r.content_type='application/json'
+    r.set_cookie(COOKIE_NAME,user2cookie(user,86400),max_age=86400,httponly=True)
+    user.password='******'
+    
+    
     r.body=json.dumps(user,ensure_ascii=False).encode('utf-8')
     return r
 
@@ -196,19 +265,27 @@ def api_authenticate(*,username,password):
 def api_register_authenticate(*,username,password):
     if not username:
         raise APIValueError('username','Invalid username')
-    if not password:
+    if not password or not _RE_SHA1.match(password):
         raise APIValueError('password','Invalid password')
 #     users = yield from User.findAll('username=?', username)
 #     if len(users)> 0:
 #         raise APIError('register:failed', 'email', 'Email is already in use.')
-    print(username)
-    print(password)
+
     users = yield from User.findAll('username=?', username)
+    
     if len(users)> 0:
         raise APIError('register:failed', 'username', 'Username is already in use.')
-    user=User(username=username,password=password)
+    
+    uid=next_id()
+    sha1_passwd='%s:%s'%(uid,password)
+    
+    user=User(id=uid,username=username.strip(),password=hashlib.sha1(sha1_passwd.encode('utf-8')).hexdigest())
     yield from user.save()
     r=web.Response()
+    r.set_cookie(COOKIE_NAME,user2cookie(user,86400),max_age=86400,httponly=True)
+    
+    user.password='******'
+    
     r.content_type='application/json'
     r.body=json.dumps(user,ensure_ascii=False).encode('utf-8')
     return r

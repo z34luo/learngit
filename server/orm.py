@@ -177,7 +177,7 @@ class Model(dict,metaclass=ModelMetaclass):
     @classmethod 
     @asyncio.coroutine
     def find(cls,pk):
-        rs= yield from select('%s where %s=?'%(cls.__select__,cls.__primary_Key__),[pk],1)
+        rs= yield from select('%s where %s=?'%(cls.__select__,cls.__primary_key__),[pk],1)
         if len(rs)==0:
             return None
         return cls(**rs[0])  ##由于只返回一行，所以取[0]
